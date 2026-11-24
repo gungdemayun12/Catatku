@@ -3,6 +3,19 @@
 File ini berisi teks jadi. Tinggal blok mana yang cocok untuk kartu portofolio,
 lalu salin. Versi lengkap ada di `PORTOFOLIO.md`.
 
+## Isi file ini
+
+| Bagian | Isi |
+| --- | --- |
+| A | Kartu portofolio — versi pendek |
+| B | Kartu portofolio — versi sedang (rekomendasi) |
+| C | Studi kasus teknis |
+| D | Tech stack |
+| D2 | Daftar fitur lengkap |
+| **D3** | **Deliverables (siap salin)** |
+| E | English version |
+| F | Catatan kredibilitas |
+
 ---
 
 ## A. Kartu portofolio — versi pendek
@@ -161,9 +174,62 @@ Kompatibilitas  : Android 8.0 (API 26) hingga Android 16 (API 36)
 
 ---
 
-## E. English version
+## D3. Deliverables (siap salin)
 
-### Title
+### Versi tabel
+
+```
+Deliverables:
+
+1. APK release signed — CatatKu-2.0-release.apk (11,36 MB)
+   versionCode 2, versionName 2.0, V2 Signing (CN=CatatKu)
+   Kompatibel Android 8.0 (API 26) hingga Android 16 (API 36)
+
+2. Kode sumber
+   105 file Java (±20.700 baris), 63 layout XML, 118 aset drawable
+   26 komponen (activity + receiver)
+
+3. Pengujian
+   84 unit test pada 13 kelas, 0 gagal
+   Uji perangkat pada font 100% dan 150%
+   0 crash, 0 ANR, 0 error tulis Firebase
+
+4. Lokalisasi
+   960 string × 2 bahasa (Indonesia & Inggris)
+
+5. Backend & keamanan
+   firestore.rules (isolasi per pengguna dengan isOwner())
+   firebase.json, google-services.json
+
+6. Dokumentasi
+   README.md, SECURITY.md, PORTOFOLIO.md, PORTOFOLIO-RINGKAS.md
+```
+
+### Versi bullet
+
+```
+- APK release signed (11,36 MB), siap dipasang langsung
+- 105 file Java (±20.700 baris) dengan 63 layout XML
+- 84 unit test pada 13 kelas, semuanya lulus
+- Dua bahasa: 960 string Indonesia + 960 string Inggris
+- Firestore Rules dengan isolasi data per pengguna
+- Dokumentasi lengkap: README, SECURITY, PORTOFOLIO
+```
+
+### Versi English
+
+```
+- Signed release APK (11.36 MB), ready for direct install
+- 105 Java files (~20,700 LOC) with 63 XML layouts
+- 84 unit tests across 13 classes, all passing
+- Bilingual: 960 Indonesian + 960 English strings
+- Per-user data isolation enforced by Firestore security rules
+- Full documentation: README, SECURITY, PORTOFOLIO
+```
+
+---
+
+## E. English version
 
 ```
 CatatKu — Native Android App for Tasks and Personal Finance

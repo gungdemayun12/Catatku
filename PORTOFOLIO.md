@@ -3,6 +3,23 @@
 Dokumen ini berisi deskripsi aplikasi CatatKu untuk keperluan portofolio.
 Semua angka diambil langsung dari kode sumber proyek, bukan perkiraan.
 
+## Daftar isi
+
+| Bagian | Isi |
+| --- | --- |
+| 1 | Ringkasan satu paragraf |
+| 2 | Spesifikasi teknis |
+| 3 | Fitur Utama — Modul To-Do List |
+| 4 | Fitur Utama — Modul Keuangan |
+| 5 | Fitur lintas modul |
+| 6 | Kualitas dan pengujian |
+| 6.1 | Daftar komponen aplikasi (26 komponen) |
+| **6.2** | **Deliverables (hasil yang diserahkan)** |
+| 7 | Aspek teknis yang layak ditonjolkan |
+| 8 | Versi ringkas untuk kartu portofolio |
+| 9 | Catatan kredibilitas |
+| 10 | English version |
+
 ---
 
 ## 1. Ringkasan satu paragraf (untuk kartu portofolio)
@@ -179,8 +196,6 @@ Repository–ViewModel–LiveData.
 
 ## 6.1 Daftar komponen aplikasi (26 komponen)
 
-Bukti cakupan fitur, diambil dari `AndroidManifest.xml`:
-
 **Autentikasi dan awal**
 `SplashActivity` · `LoginActivity` · `RegisterActivity` · `ForgotPasswordActivity`
 
@@ -201,6 +216,66 @@ Bukti cakupan fitur, diambil dari `AndroidManifest.xml`:
 
 **Notifikasi (receiver)**
 `ReminderReceiver` · `NotificationActionReceiver` · `BootReceiver`
+
+---
+
+## 6.2 Deliverables (hasil yang diserahkan)
+
+Bagian ini daftar artefak nyata yang dihasilkan proyek, semuanya sudah
+terverifikasi ada di dalam repositori.
+
+### A. Aplikasi siap pakai
+
+| Deliverable | Detail |
+| --- | --- |
+| **APK release (signed)** | `CatatKu-2.0-release.apk` — 11,36 MB |
+| Versi | versionCode 2, versionName 2.0 |
+| Tanda tangan | V2 Signing, sertifikat `CN=CatatKu` |
+| Kompatibilitas | Android 8.0 (API 26) hingga Android 16 (API 36) |
+| Distribusi | Siap dipasang langsung (sideload), sudah diuji di perangkat |
+
+### B. Kode sumber
+
+| Deliverable | Jumlah |
+| --- | --- |
+| File Java | 105 file (±20.700 baris) |
+| Layout XML | 63 file |
+| Aset drawable / ikon | 118 file |
+| Komponen (activity + receiver) | 26 komponen |
+| Struktur paket | `auth`, `home`, `todo`, `finance`, `settings`, `notification`, `common`, `data` |
+
+### C. Kualitas dan pengujian
+
+| Deliverable | Jumlah |
+| --- | --- |
+| Unit test (JUnit) | 84 test case pada 13 kelas, 0 gagal |
+| Cakupan pengujian | Kalkulasi transfer, penjadwalan tagihan, tugas berulang, validasi auth, konversi mata uang, ekspor laporan |
+| Pengujian perangkat | Seluruh fitur diverifikasi manual pada font 100% dan 150% |
+| Stabilitas | 0 crash, 0 ANR, 0 error tulis Firebase |
+
+### D. Lokalisasi
+
+| Deliverable | Jumlah |
+| --- | --- |
+| Bahasa | Indonesia (default) dan Inggris |
+| String per bahasa | 960 string × 2 file = 1.920 entri |
+
+### E. Backend dan keamanan
+
+| Deliverable | Berkas |
+| --- | --- |
+| Aturan keamanan database | `firestore.rules` — isolasi per pengguna dengan `isOwner()` |
+| Konfigurasi Firebase | `firebase.json`, `app/google-services.json` |
+| Kunci signing | `catatku-release.jks` (tidak di-commit, disimpan terpisah) |
+
+### F. Dokumentasi
+
+| Deliverable | Isi |
+| --- | --- |
+| `README.md` | Cara setup lokal, build, deploy Firestore, dan bagian keamanan |
+| `SECURITY.md` | Panduan penanganan API key dan perlindungan kredensial |
+| `PORTOFOLIO.md` | Dokumen ini — gambaran umum, fitur, deliverables |
+| `PORTOFOLIO-RINGKAS.md` | Teks siap salin untuk kartu portofolio |
 
 ---
 
