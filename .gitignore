@@ -22,6 +22,10 @@ local.properties
 firebase-debug.log
 /keystore.properties
 
+# Firebase config carries an API key; supply it locally (see README) instead
+# of committing it, so GitHub secret scanning stays clean.
+app/google-services.json
+
 # Build output and binaries
 *.apk
 *.aab
