@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    android:orientation="vertical"
+    tools:context=".todo.TodoActivity">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_feature_header_todo"
+        android:orientation="vertical"
+        android:paddingStart="18dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/homeButton"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="@string/feature_home"
+                app:icon="@drawable/ic_home"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="1"
+                    android:text="@string/todo_title"
+                    android:textColor="@color/white"
+                    android:textSize="23sp" />
+
+                <!--
+                    Two lines at large accessibility font sizes: "4 open · 1 overdue"
+                    used to be clipped to "0 belum selesai · 0 terla..." at 130%+,
+                    hiding the overdue count — the one number that tells the user
+                    something needs attention.
+                -->
+                <TextView
+                    android:id="@+id/headerSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:alpha="0.8"
+                    android:maxLines="2"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="4 open · 1 overdue" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/switchButton"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="14dp"
+                android:text="@string/feature_finance"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:backgroundTint="@color/white_12"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_wallet"
+                app:iconGravity="textStart"
+                app:iconPadding="6dp"
+                app:iconSize="18dp"
+                app:iconTint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!--
+                Same anchor as every other icon+label pair: a fixed-size frame
+                holding a centred glyph, with font padding off on the text. An
+                inline drawable would be sized by the vector's intrinsic 24dp and
+                make the pill twice as tall as its line of text.
+            -->
+            <LinearLayout
+                android:id="@+id/openPill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill_dark"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp">
+
+                <FrameLayout
+                    android:layout_width="14dp"
+                    android:layout_height="14dp">
+
+                    <ImageView
+                        style="@style/Widget.CatatKu.Icon"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_list"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/openChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:maxWidth="130dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    tools:text="4 open" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/overduePill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_pill_dark"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp">
+
+                <FrameLayout
+                    android:layout_width="14dp"
+                    android:layout_height="14dp">
+
+                    <ImageView
+                        style="@style/Widget.CatatKu.Icon"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_flag"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/overdueChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:maxWidth="130dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    tools:text="1 overdue" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/addFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="18dp"
+            android:text="@string/todo_new"
+            android:textColor="@color/todo_on_primary"
+            app:backgroundTint="@color/todo_primary"
+            app:icon="@drawable/ic_add"
+            app:iconTint="@color/todo_on_primary" />
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        style="@style/Widget.CatatKu.BottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_todo" />
+</LinearLayout>

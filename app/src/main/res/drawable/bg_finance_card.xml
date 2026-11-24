@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Balance card that sits on top of the (already graded) feature header.
+     A hairline stroke keeps it readable when light and dark blur together. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:endColor="@color/header_pill_fill"
+                android:startColor="@color/header_pill_stroke"
+                android:type="linear" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/transparent" />
+            <stroke android:width="1dp" android:color="@color/header_pill_stroke" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

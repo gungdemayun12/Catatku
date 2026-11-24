@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Soft white tile that holds the logo on the splash backdrop. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:endColor="#E6FFFFFF"
+                android:startColor="#F7FFFFFF"
+                android:type="linear" />
+            <corners android:radius="36dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="1.5dp" android:color="#59FFFFFF" />
+            <corners android:radius="36dp" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="4dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="7dp">
+
+    <TextView
+        android:id="@+id/dayLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:textColor="@color/color_on_surface"
+        android:textSize="13sp"
+        tools:text="Today" />
+
+    <TextView
+        android:id="@+id/dayCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="120dp"
+        android:textColor="@color/color_on_surface_variant"
+        android:textSize="10sp"
+        tools:text="3 transactions" />
+
+    <TextView
+        android:id="@+id/dayNet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:maxWidth="120dp"
+        android:textSize="12sp"
+        tools:text="Net −Rp 45.000" />
+</LinearLayout>

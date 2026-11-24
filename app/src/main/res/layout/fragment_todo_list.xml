@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Search, chips and filters scroll up and out of the way with the task list.
+
+    Only "scroll" is used (never "enterAlways"): with enterAlways the control block
+    snaps back down on every small upward drag, which is why it felt pinned over the
+    content and permanently ate the screen. Without it the block scrolls away like
+    any other row and the list gets the full height.
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/controlsBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background"
+        app:elevation="0dp"
+        app:liftOnScroll="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_scrollFlags="scroll">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchLayout"
+                style="@style/Widget.CatatKu.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/todo_search_hint"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--
+                Filter chips wrap onto a second row instead of being clipped. A
+                singleLine chip group inside a HorizontalScrollView kept every chip
+                on one line, so at 130–150% font the last ones ("Terlambat",
+                "Mengendap") were cut off at the screen edge with no visual hint
+                that more existed.
+
+                The 4dp gap (instead of 6dp) is what keeps all five status chips on
+                one row at the default font size: they need ~1058px with 6dp gaps
+                on a 1080px screen, so "Selesai" was pushed onto a lonely second row
+                by only ~22px. With 4dp gaps they fit, and wrapping still kicks in
+                automatically when the font is scaled up.
+            -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filterGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="12dp"
+                app:chipSpacingHorizontal="4dp"
+                app:chipSpacingVertical="0dp"
+                app:selectionRequired="true"
+                app:singleLine="false"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/filterAll"
+                    style="@style/Widget.CatatKu.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/filter_all" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/filterToday"
+                    style="@style/Widget.CatatKu.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_today" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/filterUpcoming"
+                    style="@style/Widget.CatatKu.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_upcoming" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/filterOverdue"
+                    style="@style/Widget.CatatKu.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_overdue" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/filterCompleted"
+                    style="@style/Widget.CatatKu.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_completed" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!--
+                Smart lists: one tap filters by a meaningful slice of the backlog
+                (starred, stale, quick wins, has subtasks). Kept on its own row so
+                the everyday chips above stay short and reachable.
+            -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/smartGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingHorizontal="16dp"
+                app:chipSpacingHorizontal="6dp"
+                app:chipSpacingVertical="0dp"
+                app:selectionRequired="false"
+                app:singleLine="false"
+                app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/smartFocus"
+                        style="@style/Widget.CatatKu.Chip.Suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todo_focus_title"
+                        app:chipIcon="@drawable/ic_target"
+                        app:chipIconSize="14dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/smartStarred"
+                        style="@style/Widget.CatatKu.Chip.Suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todo_smart_starred"
+                        app:chipIcon="@drawable/ic_star"
+                        app:chipIconSize="14dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/smartStale"
+                        style="@style/Widget.CatatKu.Chip.Suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todo_smart_stale"
+                        app:chipIcon="@drawable/ic_clock"
+                        app:chipIconSize="14dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/smartQuickWins"
+                        style="@style/Widget.CatatKu.Chip.Suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todo_smart_quick"
+                        app:chipIcon="@drawable/ic_check_circle"
+                        app:chipIconSize="14dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/smartWithSubtasks"
+                        style="@style/Widget.CatatKu.Chip.Suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todo_smart_subtasks"
+                        app:chipIcon="@drawable/ic_list"
+                        app:chipIconSize="14dp" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/categoryFilter"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:minHeight="38dp"
+                    android:text="@string/todo_filter_category"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_tag"
+                    app:iconSize="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/priorityFilter"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:minHeight="38dp"
+                    android:text="@string/todo_filter_priority"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_flag"
+                    app:iconSize="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dateFilter"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:minHeight="38dp"
+                    android:text="@string/todo_filter_date"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_calendar"
+                    app:iconSize="16dp" />
+            </LinearLayout>
+
+            <!-- Active-filter banner with a one-tap reset -->
+            <LinearLayout
+                android:id="@+id/activeFilterBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="8dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/activeFilterText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/todo_primary"
+                    android:textSize="11sp"
+                    tools:text="2 filters active" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/resetFilters"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:minHeight="32dp"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/finance_filter_reset"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/resultCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="11sp"
+                    tools:text="8 tasks" />
+            </LinearLayout>
+
+            <!--
+                Focus caption: explains why the list looks the way it does when
+                the "Focus today" smart filter is on. Hidden otherwise so the
+                normal list keeps its quiet header.
+            -->
+            <TextView
+                android:id="@+id/focusCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:paddingHorizontal="16dp"
+                android:text="@string/todo_focus_caption"
+                android:textColor="@color/color_on_surface_variant"
+                android:textSize="11sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <!--
+                Overload warning. Shown only when today's open, estimated work
+                crosses a full working day — the one moment where the total is
+                worth interrupting for. It stays a notice, never a blocker.
+            -->
+            <LinearLayout
+                android:id="@+id/loadWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_badge_warning"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <FrameLayout
+                    android:layout_width="16dp"
+                    android:layout_height="16dp">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_timer"
+                        app:tint="@color/warning" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@string/todo_load_heavy"
+                    android:textColor="@color/color_on_surface"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="96dp" />
+
+        <include
+            android:id="@+id/emptyState"
+            layout="@layout/view_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!--
+        Bulk-action bar. Hidden by default; appears as soon as the user
+        multi-selects tasks (long-press a card). It is a direct child of the
+        CoordinatorLayout — not of the scrolling FrameLayout — so it is positioned
+        against the window bottom and stays visible while the list scrolls.
+    -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bulkBar"
+        style="@style/Widget.CatatKu.Card.Chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="96dp"
+        android:visibility="gone"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="6dp"
+        app:contentPadding="10dp"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/bulkCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="@color/color_on_surface"
+                android:textSize="13sp"
+                tools:text="3 selected" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bulkDone"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:minWidth="0dp"
+                android:paddingHorizontal="12dp"
+                android:text="@string/todo_bulk_done"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_check_circle"
+                app:iconSize="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bulkDelete"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="@string/delete"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/expense" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bulkClose"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="@string/cancel"
+                app:icon="@drawable/ic_close"
+                app:iconTint="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

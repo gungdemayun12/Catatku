@@ -1,0 +1,30 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Release signing material. The keystore holds the app's private signing key
+# and the build file carries its passwords, so neither belongs in version
+# control. Supply them from CI secrets or a local-only file instead.
+*.jks
+*.keystore
+firebase-debug.log
+/keystore.properties
+
+# Build output and binaries
+*.apk
+*.aab
+*.ap_
+/tmpjar
+/tools

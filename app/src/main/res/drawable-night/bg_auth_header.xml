@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Soft vertical teal ramp used by the auth screens (dark). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:endColor="@color/grad_auth_end"
+        android:centerColor="@color/grad_auth_center"
+        android:startColor="@color/grad_auth_start"
+        android:type="linear" />
+    <corners android:bottomLeftRadius="34dp" android:bottomRightRadius="34dp" />
+</shape>

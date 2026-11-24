@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.CatatKu.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:contentPadding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/iconBackground"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_icon_square">
+
+                <ImageView
+                    android:id="@+id/categoryIcon"
+                    style="@style/Widget.CatatKu.Icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_tag" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface"
+                    android:textSize="14sp"
+                    tools:text="Food" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="11sp"
+                    tools:text="Rp 450.000 of Rp 1.000.000" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/percentText"
+                style="@style/Widget.CatatKu.Badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxWidth="76dp"
+                android:textSize="10sp"
+                tools:text="45%" />
+
+            <ImageView
+                android:id="@+id/openIndicator"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:contentDescription="@string/budget_open_detail"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/color_on_surface_variant" />
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:max="100"
+            app:indicatorColor="@color/finance_primary"
+            app:trackColor="@color/color_surface_variant"
+            app:trackCornerRadius="5dp"
+            app:trackThickness="8dp" />
+
+        <TextView
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:maxLines="1"
+            android:textColor="@color/color_on_surface_variant"
+            android:textSize="10sp"
+            tools:text="Rp 550.000 remaining" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- ===================================================================
+         Brand core - "Teal Emerald premium"
+         Richer teal base, deep pine for depth, mint for glow accents.
+         Roles are expressed through colorPrimary / grad_* / surface_* below.
+         =================================================================== -->
+
+    <!-- ===================================================================
+         Material roles - light
+         =================================================================== -->
+    <color name="color_primary">#0E7C6B</color>
+    <color name="color_on_primary">#FFFFFF</color>
+    <color name="color_primary_container">#B9E8DF</color>
+    <color name="color_on_primary_container">#00201B</color>
+    <color name="color_secondary">#3F635C</color>
+    <color name="color_on_secondary">#FFFFFF</color>
+    <color name="color_secondary_container">#CFE8E1</color>
+    <color name="color_on_secondary_container">#07211C</color>
+    <color name="color_tertiary">#B4600F</color>
+    <color name="color_on_tertiary">#FFFFFF</color>
+    <color name="color_tertiary_container">#FFDFC2</color>
+    <color name="color_on_tertiary_container">#331E00</color>
+    <color name="color_error">#B3261E</color>
+    <color name="color_on_error">#FFFFFF</color>
+    <color name="color_error_container">#FFDAD6</color>
+    <color name="color_on_error_container">#410002</color>
+
+    <color name="color_background">#F4F8F7</color>
+    <color name="color_on_background">#0F1E1B</color>
+    <color name="color_surface">#FFFFFF</color>
+    <color name="color_on_surface">#0F1E1B</color>
+    <color name="color_surface_variant">#DCE9E5</color>
+    <color name="color_on_surface_variant">#4A5B57</color>
+    <color name="color_surface_container">#ECF4F1</color>
+    <color name="color_surface_container_high">#E1EDE9</color>
+    <color name="color_outline">#71817D</color>
+    <color name="color_outline_variant">#C6D8D2</color>
+    <color name="color_scrim">#66000000</color>
+
+    <!-- Premium helper roles (used by the new gradient headers/cards) -->
+    <color name="chart_track">#E3EFEB</color>
+    <color name="chart_grid">#DCE8E4</color>
+
+    <!-- ===================================================================
+         Gradient stops - light
+         Each *_start / *_end pair is a subtle, tone-on-tone ramp.
+         =================================================================== -->
+    <color name="grad_auth_start">#0B5F53</color>
+    <color name="grad_auth_center">#0E7C6B</color>
+    <color name="grad_auth_end">#1C9E81</color>
+
+    <color name="grad_hero_start">#0A4F45</color>
+    <color name="grad_hero_end">#128A76</color>
+
+    <color name="grad_finance_start">#0A5A4E</color>
+    <color name="grad_finance_end">#12917C</color>
+
+    <color name="grad_todo_start">#2B3A8F</color>
+    <color name="grad_todo_end">#4C61C6</color>
+
+    <color name="grad_pine_start">#08322D</color>
+    <color name="grad_pine_end">#0F5C4F</color>
+
+    <!-- ===================================================================
+         Feature accents
+         =================================================================== -->
+    <color name="todo_primary">#3B4EA8</color>
+    <color name="todo_on_primary">#FFFFFF</color>
+    <color name="todo_primary_container">#E8EBFF</color>
+    <color name="finance_primary">#0E7C6B</color>
+    <color name="finance_primary_container">#B9E8DF</color>
+
+    <!-- ===================================================================
+         Semantic
+         =================================================================== -->
+    <color name="income">#1B8A5A</color>
+    <color name="income_soft">#DFF3E7</color>
+    <color name="expense">#C33B2E</color>
+    <color name="expense_soft">#FDECEA</color>
+    <color name="warning">#C9761A</color>
+    <color name="warning_soft">#FFF0DC</color>
+    <color name="priority_low">#2E9E60</color>
+    <color name="priority_medium">#E08A0B</color>
+    <color name="priority_high">#C33B2E</color>
+
+    <!-- Harmonised chart ramp: teal -> emerald -> cyan -> indigo -> amber -->
+    <color name="chart_palette_1">#0E7C6B</color>
+    <color name="chart_palette_2">#2BB5A0</color>
+    <color name="chart_palette_3">#3B4EA8</color>
+    <color name="chart_palette_4">#7C5CC4</color>
+    <color name="chart_palette_5">#E08A0B</color>
+    <color name="chart_palette_6">#1B8A5A</color>
+    <color name="chart_palette_7">#0E9BC4</color>
+    <color name="chart_palette_8">#93A7A2</color>
+
+    <!-- ===================================================================
+         Feature surfaces (gradient drawables reference the grad_* stops above)
+         =================================================================== -->
+    <color name="surface_finance">#0A5A4E</color>
+    <color name="surface_finance_soft">#E7F6F2</color>
+    <color name="header_pill_fill">#24FFFFFF</color>
+    <color name="header_pill_stroke">#3DFFFFFF</color>
+    <color name="empty_icon_fill">#1A0E7C6B</color>
+
+    <!-- Status badge ramp: same pill shape as the priority badge, different hue
+         per state so "open / in progress / done" is readable in one glance. -->
+    <color name="status_open">#5C6F6A</color>
+    <color name="status_progress">#2F63C8</color>
+
+    <color name="check_ripple">#260E7C6B</color>
+
+    <color name="white_12">#1FFFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="transparent">#00000000</color>
+</resources>

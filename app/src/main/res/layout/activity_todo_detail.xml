@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".todo.TodoDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/back"
+            app:icon="@drawable/ic_back"
+            app:iconTint="?attr/colorOnSurfaceVariant" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@string/todo_detail"
+            android:textColor="@color/color_on_surface"
+            android:textSize="19sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/starButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/todo_star"
+            app:icon="@drawable/ic_star"
+            app:iconTint="?attr/colorOnSurfaceVariant" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/editButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/edit"
+            app:icon="@drawable/ic_edit"
+            app:iconTint="?attr/colorOnSurfaceVariant" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/moreButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/todo_quick_actions"
+            app:icon="@drawable/ic_expand_more"
+            app:iconTint="?attr/colorOnSurfaceVariant" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/delete"
+            app:icon="@drawable/ic_delete"
+            app:iconTint="@color/expense" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/color_on_surface"
+                android:textSize="25sp"
+                tools:text="Finish the weekly report" />
+
+            <!--
+                Status row: one line, everything centred on the same axis.
+                The pills and the "See done tasks" link used to sit on three
+                different baselines because the link was a MaterialButton (it
+                carries its own insets) between two TextViews. It is now a plain
+                TextView with the same pill geometry as the badges, and the row
+                centres all three children, so the text of every element shares
+                one centre line.
+            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/statusChip"
+                    style="@style/Widget.CatatKu.Badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="150dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="11sp"
+                    tools:text="Open" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/priorityChip"
+                    style="@style/Widget.CatatKu.Badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:maxWidth="130dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="11sp"
+                    tools:text="High" />
+
+                <!-- Pushes the link to the trailing edge; invisible, 0dp wide when shown. -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/viewDoneButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/todo_view_done_tasks"
+                        android:textColor="@color/color_primary"
+                        android:textSize="11sp" />
+
+                    <FrameLayout
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_marginStart="3dp">
+
+                        <ImageView
+                            style="@style/Widget.CatatKu.Icon"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/color_primary" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--
+                Explains where a finished task went, so "Open" is never a surprise.
+                The tick is a fixed 16dp frame whose gravity centres it against the
+                single line of text; includeFontPadding is off so the text box is
+                exactly as tall as the glyphs and the two share one centre line.
+            -->
+            <LinearLayout
+                android:id="@+id/statusHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <FrameLayout
+                    android:layout_width="16dp"
+                    android:layout_height="16dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_check"
+                        app:tint="@color/income" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/statusHintText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@string/todo_status_done_hint"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.CatatKu.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:contentPadding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_description"
+                        android:textAppearance="@style/TextAppearance.CatatKu.Label"
+                        android:textAllCaps="true"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textAppearance="@style/TextAppearance.CatatKu.Body"
+                        tools:text="Collect the numbers and send the summary to the team." />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.CatatKu.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:contentPadding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_schedule"
+                        android:textAppearance="@style/TextAppearance.CatatKu.Label"
+                        android:textAllCaps="true"
+                        android:textSize="10sp" />
+
+                    <!--
+                        Label/value rows. The icon lives in a fixed 20dp frame so
+                        all three rows start their text at the same x, and the row
+                        centres icon + label + value on one axis.
+                    -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:minHeight="24dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+
+                            <ImageView
+                                style="@style/Widget.CatatKu.Icon"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/ic_calendar" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:includeFontPadding="false"
+                            android:text="@string/due_date"
+                            android:textAppearance="@style/TextAppearance.CatatKu.Body"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/dueValue"
+                            style="@style/Widget.CatatKu.MetaLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="end|center_vertical"
+                            android:maxLines="2"
+                            android:textColor="@color/color_on_surface"
+                            android:textSize="13sp"
+                            tools:text="19 Nov 2026" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:minHeight="24dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+
+                            <ImageView
+                                style="@style/Widget.CatatKu.Icon"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/ic_bell" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:includeFontPadding="false"
+                            android:text="@string/reminder"
+                            android:textAppearance="@style/TextAppearance.CatatKu.Body"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/reminderValue"
+                            style="@style/Widget.CatatKu.MetaLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="end|center_vertical"
+                            android:maxLines="2"
+                            android:textColor="@color/color_on_surface"
+                            android:textSize="13sp"
+                            tools:text="19 Nov, 08:00" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:minHeight="24dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+
+                            <ImageView
+                                style="@style/Widget.CatatKu.Icon"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/ic_repeat" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:includeFontPadding="false"
+                            android:text="@string/repeat_label"
+                            android:textAppearance="@style/TextAppearance.CatatKu.Body"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/repeatValue"
+                            style="@style/Widget.CatatKu.MetaLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="end|center_vertical"
+                            android:maxLines="2"
+                            android:textColor="@color/color_on_surface"
+                            android:textSize="13sp"
+                            tools:text="Weekly" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.CatatKu.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:contentPadding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/detail_subtasks"
+                            android:textAppearance="@style/TextAppearance.CatatKu.Label"
+                            android:textAllCaps="true"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/subtaskProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:maxLines="1"
+                            android:textColor="@color/color_on_surface_variant"
+                            android:textSize="11sp"
+                            tools:text="1 of 3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/subtaskContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:id="@+id/noSubtasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/subtask_empty"
+                        android:textAppearance="@style/TextAppearance.CatatKu.Body"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addSubtaskButton"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/subtask_add"
+                        android:textSize="12sp"
+                        app:icon="@drawable/ic_add"
+                        app:iconSize="16dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.CatatKu.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:contentPadding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_activity"
+                        android:textAppearance="@style/TextAppearance.CatatKu.Label"
+                        android:textAllCaps="true"
+                        android:textSize="10sp" />
+
+                    <LinearLayout
+                        android:id="@+id/activityContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/doneButton"
+        style="@style/Widget.CatatKu.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/todo_mark_done" />
+</LinearLayout>

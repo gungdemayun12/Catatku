@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Small round badge on the bottom-right of the avatar to signal "tap to change photo". -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="@color/color_primary" />
+    <stroke android:width="2dp" android:color="@color/color_surface" />
+</shape>

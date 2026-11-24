@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Teal Emerald premium - brand roles live in colorPrimary / grad_* / surface_*. -->
+
+    <!-- ===================================================================
+         Material roles - dark
+         =================================================================== -->
+    <color name="color_primary">#4FCCB6</color>
+    <color name="color_on_primary">#00312A</color>
+    <color name="color_primary_container">#0B4A41</color>
+    <color name="color_on_primary_container">#B9E8DF</color>
+    <color name="color_secondary">#A6CCC4</color>
+    <color name="color_on_secondary">#0B332D</color>
+    <color name="color_secondary_container">#21403A</color>
+    <color name="color_on_secondary_container">#C4E9E1</color>
+    <color name="color_tertiary">#F0B679</color>
+    <color name="color_on_tertiary">#3A2200</color>
+    <color name="color_tertiary_container">#513200</color>
+    <color name="color_on_tertiary_container">#FFDFC2</color>
+    <color name="color_error">#FFB4AB</color>
+    <color name="color_on_error">#690005</color>
+    <color name="color_error_container">#93000A</color>
+    <color name="color_on_error_container">#FFDAD6</color>
+
+    <color name="color_background">#091110</color>
+    <color name="color_on_background">#E4EDEA</color>
+    <color name="color_surface">#111B19</color>
+    <color name="color_on_surface">#E4EDEA</color>
+    <color name="color_surface_variant">#1C2926</color>
+    <color name="color_on_surface_variant">#A6B6B2</color>
+    <color name="color_surface_container">#16211F</color>
+    <color name="color_surface_container_high">#1E2E2A</color>
+    <color name="color_outline">#87938F</color>
+    <color name="color_outline_variant">#2A3A36</color>
+    <color name="color_scrim">#99000000</color>
+
+    <!-- Premium helper roles -->
+    <color name="chart_track">#1E2E2A</color>
+    <color name="chart_grid">#24352F</color>
+
+    <!-- ===================================================================
+         Gradient stops - dark (kept close to the surface colours so the
+         headers read as "lit" panels rather than flat slabs).
+         =================================================================== -->
+    <color name="grad_auth_start">#082B26</color>
+    <color name="grad_auth_center">#0C443C</color>
+    <color name="grad_auth_end">#115E53</color>
+
+    <color name="grad_hero_start">#07241F</color>
+    <color name="grad_hero_end">#0E5047</color>
+
+    <color name="grad_finance_start">#072C27</color>
+    <color name="grad_finance_end">#0F554A</color>
+
+    <color name="grad_todo_start">#191F47</color>
+    <color name="grad_todo_end">#2A3573</color>
+
+
+    <color name="grad_pine_start">#061C19</color>
+    <color name="grad_pine_end">#0D3B33</color>
+
+    <!-- ===================================================================
+         Feature accents
+         =================================================================== -->
+    <color name="todo_primary">#9AA6EE</color>
+    <color name="todo_on_primary">#131B66</color>
+    <color name="todo_primary_container">#2A3573</color>
+    <color name="finance_primary">#4FCCB6</color>
+    <color name="finance_primary_container">#0B4A41</color>
+
+    <!-- ===================================================================
+         Semantic
+         =================================================================== -->
+    <color name="income">#6FD9A6</color>
+    <color name="income_soft">#12312A</color>
+    <color name="expense">#FF9C8E</color>
+    <color name="expense_soft">#3A211F</color>
+    <color name="warning">#FFCB7A</color>
+    <color name="warning_soft">#332711</color>
+    <color name="priority_low">#6FD9A6</color>
+    <color name="priority_medium">#FFCB7A</color>
+    <color name="priority_high">#FF9C8E</color>
+
+    <color name="chart_palette_1">#4FCCB6</color>
+    <color name="chart_palette_2">#8CE3D3</color>
+    <color name="chart_palette_3">#9AA6EE</color>
+    <color name="chart_palette_4">#C4A6F2</color>
+    <color name="chart_palette_5">#FFCB7A</color>
+    <color name="chart_palette_6">#6FD9A6</color>
+    <color name="chart_palette_7">#6BD5F2</color>
+    <color name="chart_palette_8">#93A7A2</color>
+
+    <!-- ===================================================================
+         Feature surfaces
+         =================================================================== -->
+    <color name="surface_finance">#0B3A34</color>
+    <color name="surface_finance_soft">#122B26</color>
+    <color name="header_pill_fill">#24FFFFFF</color>
+    <color name="header_pill_stroke">#3DFFFFFF</color>
+    <color name="empty_icon_fill">#334FCCB6</color>
+
+    <color name="white_12">#1FFFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="transparent">#00000000</color>
+</resources>

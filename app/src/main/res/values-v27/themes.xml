@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  android:windowLightNavigationBar only exists from API 27, so it is declared
+  here instead of in the base theme files (minSdk is 26).
+
+  A style declared in a resource qualifier REPLACES the same-named definition in
+  the base folder; it does not merge with it. That is why Base.Theme.CatatKu
+  here extends Theme.CatatKu.Base (which holds the shared attributes) instead of
+  restating them, and why Theme.CatatKu.Splash extends the base splash style so
+  its gradient window background survives.
+-->
+<resources>
+
+    <style name="Base.Theme.CatatKu" parent="Theme.CatatKu.Base">
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="Theme.CatatKu.Splash" parent="Theme.CatatKu.Splash.Base">
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

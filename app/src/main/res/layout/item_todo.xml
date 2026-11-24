@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One task = one tick, one text column, one badge column.
+
+    The badge column keeps two pills in exactly the same spot on every row:
+      • statusBadge   — Open / In progress / Done (always present)
+      • priorityBadge — Low / Medium / High
+    Both share one style (bg_badge_pill + the same padding and text size), so
+    the right edge of the list is a single straight gutter instead of a badge
+    that shifts around depending on the task's state.
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.CatatKu.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:cardMaxElevation="1dp"
+    app:contentPadding="12dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!--
+            The tick is a 40dp touch target but its drawing is centred, so the
+            visual square lines up with the middle of the text column instead of
+            sitting a few pixels high.
+        -->
+        <com.example.pencatatan.common.AnimatedCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="-6dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:lineSpacingExtra="2dp"
+                    android:textColor="@color/color_on_surface"
+                    android:textSize="15sp"
+                    tools:text="Finish the weekly report" />
+            </LinearLayout>
+
+            <!--
+                Meta line: category dot + category name + due date.
+                The dot sits in a 10dp frame so it is centred on the text's cap
+                height, and every TextView here has font padding off, which is
+                what puts the dot, "College / Work" and "28 Nov 2026" on one
+                shared baseline instead of three slightly different ones.
+            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="10dp">
+
+                    <View
+                        android:id="@+id/categoryDot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_dot" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/categoryName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:maxWidth="120dp"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="11sp"
+                    tools:text="College / Work" />
+
+                <TextView
+                    android:id="@+id/dueText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:textSize="11sp"
+                    tools:text="Today · 09:00" />
+            </LinearLayout>
+
+            <!-- Reminder line: bell icon on its own fixed frame, text beside it. -->
+            <LinearLayout
+                android:id="@+id/reminderRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="14dp"
+                    android:layout_height="14dp">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_bell"
+                        app:tint="@color/color_on_surface_variant" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/reminderText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="11sp"
+                    tools:text="Reminder 08:00" />
+            </LinearLayout>
+
+            <!-- "Repeats" hint: explains why a new task appears after completing. -->
+            <LinearLayout
+                android:id="@+id/repeatRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <FrameLayout
+                    android:layout_width="14dp"
+                    android:layout_height="14dp">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_repeat"
+                        app:tint="@color/color_on_surface_variant" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/repeatHint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:text="@string/todo_repeats_hint"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!--
+                Focus / effort line. Two independent facts share this row because
+                they answer the same question ("how much is this task?"): why it
+                is at the top of the list, and how long it will take. Either
+                side can be empty; the row hides itself when both are.
+            -->
+            <LinearLayout
+                android:id="@+id/signalRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <FrameLayout
+                    android:layout_width="14dp"
+                    android:layout_height="14dp">
+
+                    <ImageView
+                        android:id="@+id/signalIcon"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_timer"
+                        app:tint="@color/color_on_surface_variant" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/signalText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="10sp"
+                    tools:text="Overdue by 3 days · ~30 min" />
+            </LinearLayout>
+
+            <!-- Progress bar shown only when the task has ticked subtasks. -->
+            <LinearLayout
+                android:id="@+id/subtaskRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/subtaskBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    app:indicatorColor="@color/todo_primary"
+                    app:trackColor="@color/color_surface_variant"
+                    app:trackCornerRadius="3dp"
+                    app:trackThickness="4dp" />
+
+                <TextView
+                    android:id="@+id/subtaskText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:maxLines="1"
+                    android:textColor="@color/color_on_surface_variant"
+                    android:textSize="10sp"
+                    tools:text="1/3" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--
+            Badge column: status on top, priority below, always in one gutter.
+            Both pills have the same height and padding, so their text sits on a
+            common baseline; the column is vertically centred against the tick.
+            The star sits above the pills so the badge gutter itself never moves:
+            starred tasks gain a glyph, not a different layout.
+        -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="end|center_vertical"
+            android:orientation="vertical">
+
+            <!--
+                Marks the card as openable. Sits above the badges rather than
+                beside the title so a two-line title never collides with it.
+            -->
+            <ImageView
+                android:id="@+id/openIndicator"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="2dp"
+                android:contentDescription="@string/todo_open_detail"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/color_on_surface_variant" />
+
+            <ImageView
+                android:id="@+id/starButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="2dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:contentDescription="@string/todo_starred"
+                android:focusable="true"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_star"
+                android:visibility="gone"
+                app:tint="@color/priority_high"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/statusBadge"
+                style="@style/Widget.CatatKu.Badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="96dp"
+                app:drawableStartCompat="@drawable/ic_dot_badge"
+                app:drawableTint="@color/status_open"
+                tools:text="Open"
+                tools:backgroundTint="@color/status_open" />
+
+            <TextView
+                android:id="@+id/priorityBadge"
+                style="@style/Widget.CatatKu.Badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:maxWidth="96dp"
+                tools:text="Medium" />
+        </LinearLayout>
+
+        <!-- Multi-select tick, shown only while the list is in selection mode. -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/selectTick"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

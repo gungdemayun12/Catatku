@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Splash screen.
+
+    Composition is by absolute anchoring rather than by stacking, because the
+    brief is that the logo sits on the exact centre of the screen. A single
+    vertical LinearLayout cannot promise that: whatever else it contains (title,
+    tagline, loader) shifts the logo away from the centre line, so the mark only
+    ends up "roughly middle". Here:
+
+      brandGroup  -> centred in the viewport, vertically and horizontally
+      loadingBox  -> pinned to the bottom, clearly secondary
+
+    The two glow rings are also centred and sit behind the brand group, so the
+    halo stays concentric with the logo.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    tools:context=".SplashActivity">
+
+    <!-- Outer ambient glow ring, concentric with the logo. -->
+    <View
+        android:id="@+id/glowOuter"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:background="@drawable/bg_splash_glow" />
+
+    <!-- Inner glow, concentric with the logo. -->
+    <View
+        android:id="@+id/glow"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:background="@drawable/bg_splash_glow" />
+
+    <!--
+        Brand group: the mark plus the wordmark. This whole block is centred, so
+        the logo's own centre lands on the screen's centre line and the wordmark
+        reads as a caption sitting under it.
+    -->
+    <LinearLayout
+        android:id="@+id/brandGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp">
+
+        <!-- Logo badge with rounded card background -->
+        <FrameLayout
+            android:id="@+id/logoBadge"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:background="@drawable/bg_splash_badge"
+            android:elevation="12dp">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_logo_splash" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="0dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/taglineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:alpha="0.85"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:paddingHorizontal="24dp"
+            android:text="@string/tagline"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!--
+        Loading affordances, pinned near the bottom. They say "work is happening"
+        without competing with the brand for the centre of the screen.
+    -->
+    <LinearLayout
+        android:id="@+id/loadingBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:paddingBottom="72dp">
+
+        <!-- Dot shimmer row -->
+        <LinearLayout
+            android:id="@+id/dotsRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/dot1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_dot" />
+
+            <View
+                android:id="@+id/dot2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_dot" />
+
+            <View
+                android:id="@+id/dot3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_dot" />
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:indeterminate="true"
+            app:indicatorColor="@color/white"
+            app:trackColor="#33FFFFFF"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="3dp" />
+
+        <TextView
+            android:id="@+id/loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:alpha="0.7"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="0dp"
+            android:text="@string/splash_loading"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+</FrameLayout>

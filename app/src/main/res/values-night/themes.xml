@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Auth screens use a dark status-bar icon set because the graded header
+         always sits behind the status bar (both light and dark themes). -->
+    <style name="Theme.CatatKu.Auth" parent="Theme.CatatKu">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Dialogs inherit the night card/surface roles but keep the new radius. -->
+    <style name="ThemeOverlay.CatatKu.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.CatatKu.Dialog</item>
+        <item name="colorSurface">@color/color_surface</item>
+    </style>
+</resources>
+

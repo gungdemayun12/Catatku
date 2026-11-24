@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One savings goal.
+
+    Reading order is deliberate and matches how people talk about a goal:
+      "Laptop baru"          - what it is
+      "Rp 4.250.000"  "35%"  - how far along
+      a progress bar         - makes the gap feel finite
+      "Rp 7.750.000 lagi"    - the only number that requires action
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.CatatKu.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:cardMaxElevation="1dp"
+    app:contentPadding="13dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Fixed frame keeps every card's title on the same left edge. -->
+            <FrameLayout
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_icon_square">
+
+                <ImageView
+                    android:id="@+id/goalIcon"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_savings"
+                    app:tint="?attr/colorPrimary" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:maxLines="1"
+                android:textColor="@color/color_on_surface"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                tools:text="Laptop baru" />
+
+            <TextView
+                android:id="@+id/percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:textColor="@color/income"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                tools:text="35%" />
+
+            <!--
+                Says "this card opens" without needing a label. The whole card is
+                tappable, but a card with no affordance reads as a static summary
+                and people never discover the deposit history behind it.
+            -->
+            <ImageView
+                android:id="@+id/openIndicator"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="4dp"
+                android:contentDescription="@string/goal_open_detail"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/color_on_surface_variant" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/amounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/color_on_surface"
+            android:textSize="13sp"
+            tools:text="Rp 4.250.000 dari Rp 12.000.000" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:trackColor="@color/color_surface_variant"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="6dp"
+            tools:progress="35" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="14dp"
+                android:layout_height="14dp">
+
+                <ImageView
+                    android:id="@+id/footerIcon"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_target"
+                    app:tint="@color/color_on_surface_variant" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/footerText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:maxLines="1"
+                android:textColor="@color/color_on_surface_variant"
+                android:textSize="11sp"
+                tools:text="Kurang Rp 7.750.000" />
+
+            <!--
+                The one action that matters day to day: put money in. Kept on
+                the card (not behind a menu) so saving is one tap away.
+            -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/topUpButton"
+                style="@style/Widget.CatatKu.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="32dp"
+                android:paddingHorizontal="14dp"
+                android:text="@string/goal_topup"
+                android:textSize="12sp"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

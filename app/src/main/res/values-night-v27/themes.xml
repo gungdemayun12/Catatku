@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Night counterparts of the API 27 attributes. See values-v27/themes.xml for why
+  each style extends a base style instead of restating the shared attributes.
+-->
+<resources>
+
+    <style name="Base.Theme.CatatKu" parent="Theme.CatatKu.Base">
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="Theme.CatatKu.Splash" parent="Theme.CatatKu.Splash.Base">
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

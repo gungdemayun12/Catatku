@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="4dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/categoryButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="start|center_vertical"
+        android:maxLines="1"
+        android:text="@string/budget_select_category"
+        android:textSize="13sp"
+        app:icon="@drawable/ic_tag"
+        app:iconGravity="textStart"
+        app:iconSize="18dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/limitLayout"
+        style="@style/Widget.CatatKu.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/budget_limit"
+        app:prefixText="IDR">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/limitEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/budgetSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/color_on_surface_variant"
+        android:textSize="11sp"
+        android:visibility="gone"
+        tools:text="Rp 450.000 used of Rp 1.000.000"
+        tools:visibility="visible" />
+</LinearLayout>

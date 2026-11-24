@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Donut legend row: colour dot, name, value · percent.
+  The dot sits in a 14dp frame so every dot is centred on the same axis, and both
+  labels have font padding off, which keeps the dot, the name and the value on one
+  shared centre line regardless of the font scale.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="32dp"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="14dp"
+        android:layout_height="14dp">
+
+        <View
+            android:id="@+id/legendDot"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dot" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/legendName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:maxLines="1"
+        android:textColor="@color/color_on_surface"
+        android:textSize="12sp"
+        tools:text="Food" />
+
+    <TextView
+        android:id="@+id/legendValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:maxLines="1"
+        android:maxWidth="150dp"
+        android:textColor="@color/color_on_surface_variant"
+        android:textSize="11sp"
+        tools:text="Rp 450.000 · 32%" />
+</LinearLayout>
