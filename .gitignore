@@ -7,6 +7,9 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+# The whole IDE folder is per-machine state. Individual files above are kept
+# for older checkouts; this line covers everything else (vcs.xml, markdown.xml).
+/.idea/
 .DS_Store
 /build
 /captures
